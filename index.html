@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+	
+		body{
+		    background-color: #FFEEB5;
+		    font-size: 100%;
+
+
+		}
+		.wrapper{
+		  top: 20px;
+		  position: relative;
+		  width:500px;
+		  margin:0px auto;
+		}
+
+		.back{
+		  position: absolute;
+		  width:500px;
+		  height: 500px;
+		  z-index:0;
+		  background-color: #000;
+		  border-radius: 242px;
+		}
+		.pad {
+		  width: 230px;
+		  height: 230px;
+		  float: left;
+		  z-index: 1;
+		  margin: 10px;
+		  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+		  filter: alpha(opacity=60);
+		  opacity: 0.6;
+		}
+
+		.shape1 {
+		  border-top-left-radius: 300px;
+		  background-color: green;
+		}
+
+		.shape2 {
+		  float: left;
+		  border-top-right-radius: 300px;
+		  background-color: red;
+		  clear: right;
+		}
+
+		.shape3 {
+		  float: left;
+		  border-bottom-left-radius: 300px;
+		  background-color: yellow;
+		  clear: left;
+		}
+
+		.shape4 {
+		  float: left;
+		  border-bottom-right-radius: 300px;
+		  background-color: blue;
+		}
+		.circle {
+
+		  position: absolute;
+		  top: 122px;
+		  left: 122px;
+		  width: 255px;
+		  height: 255px;
+		  background: #000;
+		  border-radius: 125px;
+		  z-index: 10;
+		}
+		.circle_content{
+			position: absolute;
+			left: 25px;
+			top: 25px;
+			text-align: center;
+			background-color: rgb(205, 208, 215);
+			border-radius: 300px;
+			width: 200px;
+			height: 200px;
+		}
+		a.toggler {
+		    background: green;
+		    cursor: pointer;
+		    border: 2px solid gray;
+		    border-right-width: 15px;
+		    padding: 0 5px;
+		    border-radius: 5px;
+		    text-decoration: none;
+		    transition: all .5s ease;
+		}
+
+		a.toggler.on {
+		    background: green;
+		    border-right-width: 2px;
+		    border-left-width: 15px;
+		}
+		.simon-font {
+			font-family: 'Orbitron', sans-serif;			
+			
+		}
+		.btn-circle {
+		  width: 30px;
+		  height: 30px;
+		  text-align: center;
+		  padding: 6px 0;
+		  font-size: 6px;
+		  line-height: 1.42;
+		  border-radius: 15px;
+		-webkit-box-shadow: 0px 1px 0px 2px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 1px 0px 2px rgba(0,0,0,0.75);
+		box-shadow: 0px 3px 0px 2px rgba(0,0,0,0.75);
+		}
+        @media screen and (max-width: 700px){
+            body{
+                font-size: 75%;
+            }
+            .wrapper{
+              top: 20px;
+              position: relative;
+              width:250px;
+              margin:0px auto;
+            }
+            .back{
+                width: 250px;
+                height: 250px;
+                border-radius: 131px;
+            }
+            .pad{
+                width: 105px;
+                height: 105px;
+            }
+            .shape1 {
+              border-top-left-radius: 117px;
+            }
+
+            .shape2 {
+              float: left;
+              border-top-right-radius: 117px;
+            }
+
+            .shape3 {
+              float: left;
+              border-bottom-left-radius: 117px;
+            }
+
+            .shape4 {
+              float: left;
+              border-bottom-right-radius: 117px;
+            }
+            .circle {
+
+              top: 40px;
+              left: 40px;
+              width: 170px;
+              height: 170px;
+              border-radius: 200px;
+            }
+            .circle_content{
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                text-align: center;
+                background-color: rgb(205, 208, 215);
+                border-radius: 150px;
+                width: 150px;
+                height: 150px;
+            }
+            .btn-circle {
+              width: 15px;
+              height: 15px;
+              text-align: center;
+              border-radius: 15px;
+            }
+            h1{
+              font-weight: bold;
+              font-size: 20px;
+            }
+        }
+		button:focus {outline:0 !important;}
+		.borderless td, .borderless th {
+		    border: none !important;
+		}
+		.disable-button{
+			pointer-events: none;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+    <div class="back">
+      <div class="pad shape1" data-pad="1">
+        <audio preload="auto" class="sound1" data-pad="1">
+          <source src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" type="audio/mpeg"/>
+        </audio>
+      </div>
+
+      <div class="pad shape2" data-pad="2">
+        <audio preload="auto" class="sound2" data-pad="2">
+          <source src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3" type="audio/mpeg"/>
+<!--           <source src="sounds/ogg/sounds_02.ogg" type="audio/ogg"/> -->
+        </audio>
+      </div>
+
+      <div class="pad shape3" data-pad="3">
+        <audio preload="auto" class="sound3" data-pad="3">
+          <source src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3" type="audio/mpeg"/>
+<!--           <source src="sounds/ogg/sounds_03.ogg" type="audio/ogg"/> -->
+        </audio>
+      </div>
+
+      <div class="pad shape4" data-pad="4">
+        <audio preload="auto" class="sound4" data-pad="4">
+          <source src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3" type="audio/mpeg"/>
+          <!-- <source src="sounds/ogg/sounds_04.ogg" type="audio/ogg"/> -->
+        </audio>
+      </div>
+      <audio preload="auto" class="sound_buzzer" >
+	    <source src="http://www.orangefreesounds.com/wp-content/uploads/2014/08/Wrong-answer-sound-effect.mp3?_=1" type="audio/mpeg"/>
+	    <!-- <source src="sounds/ogg/sounds_04.ogg" type="audio/ogg"/> -->
+	  </audio>
+	  <audio preload="auto" class="victory" >
+	    <source src="http://74.86.207.139/content/ringtone/2007/1192186263817.mp3" type="audio/mpeg"/>
+	    <!-- <source src="sounds/ogg/sounds_04.ogg" type="audio/ogg"/> -->
+	  </audio>
+      <div class="circle">
+      	<div class="circle_content">
+      		<h1><b>Simon</b></h1>
+      		<table class = "table borderless">
+      			<tr>
+      				<td class="simon-font" style="font-size: 150%;"><span id="level_screen">--</span></td>
+      				<td><button id="start" class="btn btn-default btn-circle btn-danger"></button></td>
+      				<td><button id="strict" class="btn btn-default btn-circle btn-warning"></button></td>
+      			</tr>
+      			<tr>
+      				<td>COUNT</td>
+      				<td>START</td>
+      				<td>STRICT</td>
+      			</tr>
+      		</table>
+      		
+      		<span class= "simon-font" >OFF</span><a href="#" class="toggler switch disable-button" style ="font-size:125%;"><!-- &nbsp; --></a><span class= "simon-font" >ON</span>
+      	</div>
+      </div>
+    </div>
+
+    <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    	function simon() {
+    		var that = this;
+    		that.settings = {
+    			strictMode : false,
+    			powerOn : false,
+    			maxLevel : 20
+    		}
+    		this.level = 1;
+    		var requiredSteps = [];
+    		this.turn = 'cpu';
+    		//pang ilan sa pindot 
+    		that.playerClickPosition = 0;
+
+    		this.IsFlashCorrect = function(pad){
+    			var returnData = false;
+    			if(requiredSteps[that.playerClickPosition] === pad){
+    				returnData = true;
+    			}
+    			return returnData;
+    		}
+    		// determines kung napindot na lahat ng steps
+    		this.IsStageClear = function(){
+    			var returnData = false;
+    			if(that.playerClickPosition === requiredSteps.length - 1){
+    				returnData = true;
+    			}
+    			return returnData;
+    		}
+    		this.NextStep = function(){
+    			that.playerClickPosition += 1;
+    		}
+    		this.NextStage = function(){
+    			that.level += 1;
+    			that.playerClickPosition = 0;
+    			//push a random pad
+    			requiredSteps.push(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
+    			that.cpuFlash();
+    		}
+    		this.cpuFlash = function(){
+    			that.turn = 'cpu';
+    			var ctr = 0;
+    			var speed = 1000;
+    			while(ctr < requiredSteps.length){
+    				setTimeout(that.playSound,speed,requiredSteps[ctr]);
+    				setTimeout(that.flash,speed,requiredSteps[ctr]);
+    				ctr++;
+    				speed = speed + 1000;
+    			}
+    			setTimeout(function(){that.turn = 'p1';},speed);
+    			
+    		}
+    		//animation
+    		this.flash = function(pad){
+    			var element = $(".shape" + pad);
+    			element.stop().animate({opacity: '1'}, {		//animate the element to appear to flash
+					duration: 50,
+					complete: function(){
+					element.stop().animate({opacity: '0.6'}, 200);
+					}
+				});
+    		}
+    		this.playSound = function(val){
+    			var sound= $('.sound' + val)[0];
+				sound.currentTime=0;
+				sound.play();
+    		}
+
+    		this.initialize = function(){
+				requiredSteps = [];
+				that.playerClickPosition = 0;
+				that.level = 0;
+				that.turn = 'cpu';
+				that.NextStage();
+    		}
+
+    		this.On = function(){
+    			that.settings.powerOn = true;
+    		} 
+
+    		this.Off = function(){
+    			that.settings.powerOn = false;
+    		}
+    	}
+    	var simonGame;
+    	$(document).ready(function(){
+    		simonGame = new simon();
+            
+    		$('a.toggler').click(function(){
+		        $(this).toggleClass('on');
+		    });
+		    $('.switch').removeClass('disable-button');
+
+    		$('.switch').click(function(){
+    			if(simonGame.settings.powerOn === false){
+    				simonGame.On();
+    			}
+    			else{
+    				simonGame.Off();
+    				$('#level_screen').text('--');
+    			}
+    		});
+    	});
+    	$('#start').click(function(){
+    		if(simonGame.settings.powerOn === true){
+				simonGame.initialize();
+	    		setTimeout(function(){$('#level_screen').text(simonGame.level);},1000);    			
+    		}
+    		
+    	});
+    	$('#strict').click(function(){
+    		if(simonGame.settings.strictMode === true){
+    			simonGame.settings.strictMode = false;
+    			$(this).removeClass('active');
+    		}
+    		else{
+    			simonGame.settings.strictMode = true;
+    			$(this).addClass('active');
+    		}
+    	});
+    	$('.pad').click(function(){
+
+    		if(simonGame.settings.powerOn === true && simonGame.turn === 'p1'){
+
+    			if( simonGame.IsFlashCorrect( $(this).data('pad') ) ){
+    				simonGame.playSound($(this).data('pad'));
+    				simonGame.flash($(this).data('pad'));
+    				if( simonGame.IsStageClear() ){
+    					if(simonGame.settings.maxLevel === simonGame.level){
+    						$('#level_screen').text('!!');
+		    				var sound= $('.victory')[0];
+							sound.currentTime=0;
+							sound.play();
+                setTimeout(simonGame.initialize,4000);
+                setTimeout(function(){$('#level_screen').text(simonGame.level);},5000);
+    					}
+    					else{
+    						simonGame.NextStage();
+	    					setTimeout(function(){$('#level_screen').text(simonGame.level);},1000);
+    					}
+    					
+    					
+    				}
+    				else{
+    					simonGame.NextStep();
+    				}
+    			}
+    			else{
+    				$('#level_screen').text('!!');
+    				var sound= $('.sound_buzzer')[0];
+  					sound.currentTime=0;
+  					sound.play();
+    				if(simonGame.settings.strictMode === true){
+    					setTimeout(simonGame.initialize,1000);
+    					setTimeout(function(){$('#level_screen').text(simonGame.level);},2000); 
+    				}
+    				else{
+    					setTimeout(simonGame.cpuFlash,1000);
+    					setTimeout(function(){$('#level_screen').text(simonGame.level);},2000);
+    					simonGame.playerClickPosition = 0;
+    				}
+    			}
+    		}
+    	});
+    </script>
+</body>
+
+</html>
